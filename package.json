@@ -1,0 +1,31 @@
+{
+  "name": "aether",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "adafruit-i2c-lcd": "^1.0.2",
+    "rpi-ws2801": "0.0.4",
+    "rpi-ws281x-native": "^0.8.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.11"
+  },
+  "scripts": {
+    "start": "sudo node ./server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nase00/aether.git"
+  },
+  "author": "Sean Owiecki",
+  "license": "MIT",
+  "engines": {
+    "node": "8.9.4",
+    "npm": "5.6.0"
+  },
+  "bugs": {
+    "url": "https://github.com/Nase00/aether/issues"
+  },
+  "homepage": "https://github.com/Nase00/aether#readme"
+}
