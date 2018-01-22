@@ -1,0 +1,41 @@
+{
+  "plugins": ["filenames"],
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "env": {
+    "es6": true
+  },
+  "rules": {
+    "strict": 0,
+    "global-require": 0,
+    "import/no-unresolved": 0,
+    "quotes": [2, "single"],
+    "arrow-body-style": [2, "as-needed"],
+    "func-style": [2, "expression"],
+    "prefer-arrow-callback": [2, {
+      "allowNamedFunctions": false,
+      "allowUnboundThis": false
+    }],
+    "import/extensions": 0,
+    "func-names": 2,
+    "indent": [2, 2, {"SwitchCase": 1}],
+    "no-invalid-this": 0,
+    "valid-jsdoc": 0,
+    "comma-dangle": 0,
+    "no-param-reassign": 0,
+    "consistent-return": 0,
+    "default-case": 0,
+    "no-extra-parens": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/prefer-default-export": 0,
+    "no-undef": 0,
+    "no-plusplus": 0,
+    "object-curly-newline": 0,
+    "arrow-parens": 0,
+    "no-restricted-globals": 0,
+    "function-paren-newline": [2, "consistent"]
+  },
+  "globals": {
+    "require": true
+  }
+}
