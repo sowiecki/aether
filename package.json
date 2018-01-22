@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "adafruit-i2c-lcd": "^1.0.2",
+    "redux": "^3.7.2",
     "rpi-ws2801": "0.0.4",
     "rpi-ws281x-native": "^0.8.2"
   },
