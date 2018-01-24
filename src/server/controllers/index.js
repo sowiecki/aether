@@ -1,2 +1,7 @@
-export neoPixelController from './neo-pixel';
-export plateController from './plate';
+import neoPixelController from './neo-pixel';
+import plateController from './plate';
+
+export default {
+  neoPixelController,
+  plateController
+};
