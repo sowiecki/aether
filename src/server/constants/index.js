@@ -1,5 +1,1 @@
-import * as neoPixelConstants from './neo-pixel';
-
-export default {
-  ...neoPixelConstants
-};
+export * from './neo-pixel';
