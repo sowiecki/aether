@@ -3,7 +3,7 @@ import ws281x from 'rpi-ws281x-native';
 import { NUM_LEDS } from '../constants';
 
 const neoPixelController = {
-  pixelData: new Uint32Array(NUM_LEDS),
+  pixelData: new Uint32Array(NUM_LEDS), // TODO move to ducks
   init: () => {
     ws281x.init(NUM_LEDS);
 
@@ -14,10 +14,10 @@ const neoPixelController = {
 
     // POC code
     for (let i = 0; i < NUM_LEDS; i++) {
-      pixelData[i] = 0xffcc22;
+      neoPixelController.pixelData[i] = 0xffcc22;
     }
 
-    ws281x.render(pixelData);
+    ws281x.render(neoPixelController.pixelData);
 
     const t0 = Date.now();
     setInterval(() => {
