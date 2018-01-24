@@ -1,0 +1,26 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "node": "8.9.3"
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "config": "./server/config",
+          "constants": "./server/constants",
+          "controllers": "./server/controllers",
+          "ducks": "./server/ducks"
+        }
+      }
+    ]
+  ]
+}
