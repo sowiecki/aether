@@ -1,7 +1,6 @@
 import { plate as LCDPlate } from 'adafruit-i2c-lcd';
 
 const neoPixelController = {
-  pixelData: new Uint32Array(NUM_LEDS),
   init: () => {
     // POC using example code from libs
     const lcd = new LCDPlate(1, 0x20);
