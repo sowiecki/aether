@@ -1,5 +1,5 @@
-const neoPixelConstants = require('./neo-pixel');
+import * as neoPixelConstants from './neo-pixel';
 
-module.exports = {
+export default {
   ...neoPixelConstants
 };

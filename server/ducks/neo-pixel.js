@@ -1,7 +1,24 @@
-const EMIT_LIGHT_CHANGE = 'EMIT_LIGHT_CHANGE';
+import { handleActions, createAction } from 'redux-actions';
 
-const neoPixelReducer = (state, action) => ({
-  [EMIT_LIGHT_CHANGE]: () => {}
+const defaultState = { counter: 10 };
+
+const EMIT_LIGHT_STRIP_UPDATE = 'EMIT_LIGHT_STRIP_UPDATE';
+
+export const emitLightStripUpdate = createAction(EMIT_LIGHT_STRIP_UPDATE, {
+  red,
+  green,
+  blue,
+  white
 });
 
-module.exports = neoPixelReducer;
+const neoPixelReducer = handleActions(
+  {
+    [EMIT_LIGHT_STRIP_UPDATE]: (state, colors) => ({
+      ...state,
+      colors
+    })
+  },
+  defaultState
+);
+
+export default neoPixelReducer;

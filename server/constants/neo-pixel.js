@@ -1,1 +1,1 @@
-module.exports.NUM_LEDS = 200;
+export const NUM_LEDS = 200;

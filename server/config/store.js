@@ -1,7 +1,7 @@
-const { createStore, applyMiddleware, combineReducers } = require('redux');
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 
-const reducers = require('ducks');
-const api = require('../middleware/api');
+import reducers from 'ducks';
+import api from '../middleware/api';
 
 const rootReducer = combineReducers(reducers);
 
@@ -13,4 +13,4 @@ const configureStore = initialState => {
 
 const store = configureStore();
 
-module.exports = store;
+export default store;

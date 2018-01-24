@@ -1,6 +1,6 @@
-const ws281x = require('rpi-ws281x-native');
+import ws281x from 'rpi-ws281x-native';
 
-const { NUM_LEDS } = require('../constants');
+import { NUM_LEDS } from '../constants';
 
 const neoPixelController = {
   pixelData: new Uint32Array(NUM_LEDS),
@@ -28,4 +28,4 @@ const neoPixelController = {
   }
 };
 
-module.exports = neoPixelController;
+export default neoPixelController;
