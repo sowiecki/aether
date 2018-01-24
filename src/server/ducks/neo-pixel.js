@@ -1,6 +1,13 @@
 import { handleActions, createAction } from 'redux-actions';
 
-const defaultState = { counter: 10 };
+const defaultState = {
+  colors: {
+    red: 0,
+    green: 0,
+    blue: 0,
+    white: 255
+  }
+};
 
 const EMIT_LIGHT_STRIP_UPDATE = 'EMIT_LIGHT_STRIP_UPDATE';
 

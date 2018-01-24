@@ -11,6 +11,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "lodash": "^4.17.4",
+    "opn": "^5.2.0",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "rpi-ws2801": "0.0.4",
