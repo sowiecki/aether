@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "adafruit-i2c-lcd": "^1.0.2",
+    "babel-plugin-module-resolver": "^3.0.0",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "lodash": "^4.17.4",
