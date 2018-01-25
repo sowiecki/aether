@@ -5,6 +5,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@koa/cors": "^2.2.1",
     "adafruit-i2c-lcd": "^1.0.2",
     "babel-plugin-module-resolver": "^3.0.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -46,13 +47,14 @@
     "react-dev-utils": "^5.0.0",
     "react-error-overlay": "^4.0.0",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.11.1"
+    "webpack-dev-server": "^2.11.1",
+    "webpack-hot-middleware": "^2.21.0"
   },
   "scripts": {
     "start": "sudo node ./src/index.js",
     "dev": "concurrently -r \"npm run client-dev\" \"npm run server-dev\"",
     "client-dev": "webpack-dev-server --config webpack/webpack.config.dev.js --color --inline",
-    "server-dev": "NODE_ENV=development nodemon --ignore webpack/ --ignore client/ ./src/index.js",
+    "server-dev": "NODE_ENV=development nodemon --config .nodemonrc ./src/index.js",
     "lint": "eslint *.js src"
   },
   "repository": {

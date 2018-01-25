@@ -16,6 +16,9 @@ module.exports = {
     app: [
       require.resolve('react-dev-utils/webpackHotDevClient'),
       require.resolve('react-error-overlay'),
+      // 'webpack-hot-middleware/client?path=http://localhost:8080/__webpack_hmr',
+      // 'webpack/hot/only-dev-server',
+      'react-hot-loader/patch',
       base.entry
     ].filter((e) => e)
   },
@@ -40,6 +43,9 @@ module.exports = {
   },
   externals: base.externals,
   devServer: {
+    proxy: {
+      '/': 'http://localhost:8080'
+    },
     host: '0.0.0.0',
     port: 3000,
     disableHostCheck: true,
@@ -57,6 +63,14 @@ module.exports = {
       ignored: /node_modules/
     },
     before(app) {
+      app.use((req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header(
+          'Access-Control-Allow-Headers',
+          'Origin, X-Requested-With, Content-Type, Accept'
+        );
+        next();
+      });
       app.use(errorOverlayMiddleware());
       app.use(noopServiceWorkerMiddleware());
     }

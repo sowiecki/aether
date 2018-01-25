@@ -1,11 +1,11 @@
 import Router from 'koa-router';
 
-import applicationView from '../views/application';
+import genApplicationView from '../views/application';
 
 const router = new Router();
 
 router.get('/', async (ctx) => {
-  ctx.body = applicationView;
+  ctx.body = genApplicationView(ctx);
 });
 
 export default router;

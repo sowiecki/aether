@@ -3,9 +3,9 @@ import React, { PureComponent } from 'react';
 import { Provider } from 'react-redux';
 
 class Root extends PureComponent {
-  componentDidCatch = (error, info) => {
-    console.warn(error, info);
-  };
+  // componentDidCatch = (error, info) => {
+  //   console.warn(error, info);
+  // };
 
   render() {
     return (
