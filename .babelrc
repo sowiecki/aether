@@ -1,0 +1,28 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "node": "8.9.3"
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-object-rest-spread",
+    "transform-class-properties",
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "config": "./server/config",
+          "constants": "./server/constants",
+          "controllers": "./server/controllers",
+          "ducks": "./server/ducks"
+        }
+      }
+    ]
+  ]
+}
