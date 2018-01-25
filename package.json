@@ -1,5 +1,6 @@
 {
   "name": "aether",
+  "private": true,
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -14,8 +15,10 @@
     "opn": "^5.2.0",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
+    "redux-thunk": "^2.2.0",
     "rpi-ws2801": "0.0.4",
-    "rpi-ws281x-native": "^0.8.2"
+    "rpi-ws281x-native": "^0.8.2",
+    "ws": "^4.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
@@ -29,7 +32,9 @@
   },
   "scripts": {
     "start": "sudo node ./src/index.js",
-    "lint": "eslint *.js server"
+    "server-dev": "nodemon ./src/index.js",
+    "dev": "NODE_ENV=development npm run server-dev",
+    "lint": "eslint *.js src"
   },
   "repository": {
     "type": "git",

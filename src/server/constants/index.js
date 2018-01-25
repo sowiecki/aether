@@ -1,1 +1,1 @@
-export * from './neo-pixel';
+export * from './colors';

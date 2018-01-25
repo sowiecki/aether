@@ -2,7 +2,7 @@ import { forEach } from 'lodash/fp';
 
 import controllers from './controllers';
 
-const runInit = controller => {
+const runInit = (controller) => {
   controller.init();
 };
 

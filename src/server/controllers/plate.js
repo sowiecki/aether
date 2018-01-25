@@ -8,7 +8,7 @@ const neoPixelController = {
     lcd.backlight(lcd.colors.BLUE);
     lcd.message('Hello World!');
 
-    lcd.on('button_change', button => {
+    lcd.on('button_change', (button) => {
       lcd.clear();
       lcd.message(`Button changed:\n ${lcd.buttonName(button)}`);
       console.log(`Button changed:\n ${lcd.buttonName(button)}`);
