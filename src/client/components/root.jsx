@@ -2,14 +2,12 @@
 import React, { PureComponent } from 'react';
 import { Provider } from 'react-redux';
 
-class Root extends PureComponent {
-  // componentDidCatch = (error, info) => {
-  //   console.warn(error, info);
-  // };
+import store from '../config/store';
 
+class Root extends PureComponent {
   render() {
     return (
-      <Provider>
+      <Provider store={store}>
         <div>Hello, world!</div>
       </Provider>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Root from './root';
+import Root from './components/root';
 
 const node = document.getElementById('root');
 

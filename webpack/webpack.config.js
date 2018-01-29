@@ -2,11 +2,12 @@ const path = require('path');
 
 const webpack = require('webpack');
 
-const baseContext = path.join(__dirname, '../src');
+const baseContext = path.join(__dirname, '../src/client');
+const universalContext = path.join(__dirname, '../src/universal');
 
 module.exports = {
   context: baseContext,
-  entry: '../src/client/index.jsx',
+  entry: 'index.jsx',
   output: {
     path: path.resolve(__dirname, '../build'),
     filename: 'bundle.js',
@@ -15,7 +16,10 @@ module.exports = {
   },
   resolve: {
     modules: [baseContext, 'node_modules'],
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    alias: {
+      universal: path.resolve(universalContext)
+    }
   },
   module: {
     rules: [
@@ -24,7 +28,7 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         },
-        include: baseContext,
+        include: [baseContext, universalContext],
         exclude: /node_modules/
       },
       {
