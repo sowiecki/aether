@@ -1,9 +1,10 @@
-// import opn from 'opn';
+import opn from 'opn';
 import WebSocket from 'ws';
 
-import { WEB_SOCKET_PORT } from '../config';
-
-import { emitClientConnection, emitclientDisconnection } from '../ducks/socket';
+import { WEB_SOCKET_PORT } from 'config';
+import { HANDSHAKE, MESSAGE } from 'constants';
+import { EMIT_SOCKET_HANDSHAKE, EMIT_SOCKET_ERROR } from 'ducks/socket/types';
+import { logger } from 'utils';
 
 const wss = new WebSocket.Server({ port: WEB_SOCKET_PORT });
 
@@ -12,8 +13,7 @@ const wss = new WebSocket.Server({ port: WEB_SOCKET_PORT });
  */
 const socketController = {
   init: () => {
-    // TODO
-    // opn('localhost:3000');
+    opn('localhost:3000');
   },
 
   /**
@@ -21,9 +21,9 @@ const socketController = {
    * @params{string} event Event constant for initial communication with client.
    * @returns {undefined}
    */
-  open(event, payload) {
+  open(dispatch, payload) {
     wss.on('connection', (client) => {
-      socketController.send(event, payload, client); // Initialize with config
+      socketController.send(HANDSHAKE, payload, client); // Initialize with config
 
       client.on('message', (data) => {
         const message = JSON.parse(data);
@@ -32,7 +32,7 @@ const socketController = {
       });
 
       client.on('close', () => {
-        emitClientDisconnect();
+        dispatch({ type: EMIT_SOCKET_ERROR });
       });
     });
   },
@@ -45,10 +45,10 @@ const socketController = {
    * @param {ws | undefined} client WebSocket object associated with specific targetted client.
    * @returns {undefined}
    */
-  handle(event, payload, client) {
+  handle(dispatch, event, payload) {
     const handlers = {
       [HANDSHAKE]() {
-        emitClientConnection(client);
+        dispatch({ type: EMIT_SOCKET_HANDSHAKE });
       },
 
       [MESSAGE]() {
@@ -65,7 +65,7 @@ const socketController = {
     socketController.errorNoHandler(event);
   },
 
-  send(event, payload = {}, client) => {
+  send(event, payload = {}, client) {
     if (client.readyState === 1) {
       client.send(JSON.stringify({ event, payload }));
     } else {
@@ -74,15 +74,15 @@ const socketController = {
   },
 
   getClient() {
-    store.getState().socketReducer.client;
+    return store.getState().socketReducer.client;
   },
 
   errorNoHandler(event) {
-    console.warn(`No socketController handler for ${event}!`);
+    logger.warn(`No socketController handler for ${event}!`);
   },
 
   errorNotReady(event, client) {
-    console.warn(`Event ${event} not sent, client not ready!`, client);
+    logger.warn(`Event ${event} not sent, client not ready!`, client);
   }
 };
 

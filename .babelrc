@@ -18,10 +18,13 @@
       {
         "root": ["./src"],
         "alias": {
-          "config": "./server/config",
-          "constants": "./server/constants",
-          "controllers": "./server/controllers",
-          "ducks": "./server/ducks"
+          "actions": "./src/server/actions",
+          "config": "./src/server/config",
+          "constants": "./src/server/constants",
+          "controllers": "./src/server/controllers",
+          "ducks": "./src/server/ducks",
+          "universal": "./src/universal",
+          "utils": "./src/server/utils"
         }
       }
     ]

@@ -1,3 +1,4 @@
 export const HANDSHAKE = 'HANDSHAKE';
+export const MESSAGE = 'MESSAGE';
 export const RECONNECTED = 'RECONNECTED';
 export const TEMPERATURE_UPDATE = 'TEMPERATURE_UPDATE';
