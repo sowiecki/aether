@@ -4,6 +4,7 @@ import bodyParser from 'koa-bodyparser';
 import actions from 'actions';
 import { SERVER_PORT } from 'config';
 import { logger } from 'utils';
+import store from './config/store';
 import router from './routes';
 
 const server = new Koa();
@@ -15,7 +16,7 @@ const run = async () => {
   logger.log('info', `Listening on port ${SERVER_PORT}`);
 
   try {
-    actions.emitSocketInit();
+    actions.emitSocketInit(store);
   } catch (e) {
     logger.warn(e);
   }
