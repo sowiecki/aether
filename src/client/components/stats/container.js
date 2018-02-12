@@ -6,6 +6,7 @@ import * as MetaActions from '../../ducks/meta';
 import StatsController from './controller';
 
 const mapStateToProps = ({ metaReducer }) => ({
+  connected: metaReducer.connected,
   temperature: metaReducer.temperature
 });
 
