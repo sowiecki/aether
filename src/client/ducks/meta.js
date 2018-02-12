@@ -1,17 +1,18 @@
 import { handleActions } from 'redux-actions';
 
-import { EMIT_SOCKET_HANDSHAKE } from '../constants';
+import socket from './socket';
 
-const defaultState = {};
+const initialState = {
+  ...socket.initialState,
+  temperature: 0 // TODO move to stats ducks
+};
 
 // TODO make meta
 const reducer = handleActions(
   {
-    [EMIT_SOCKET_HANDSHAKE]: (state) => ({
-      state
-    })
+    ...socket.handlers
   },
-  defaultState
+  initialState
 );
 
 export default reducer;

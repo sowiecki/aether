@@ -1,19 +1,10 @@
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
-import { forEach } from 'lodash/fp';
 
-import controllers from './controllers';
+import actions from 'actions';
+import { SERVER_PORT } from 'config';
+import { logger } from 'utils';
 import router from './routes';
-import { SERVER_PORT } from './config';
-import { logger } from './utils';
-
-const init = (controller) => {
-  try {
-    controller.init();
-  } catch (e) {
-    // console.warn(e);
-  }
-};
 
 const server = new Koa();
 
@@ -23,7 +14,11 @@ server.use(router.routes());
 const run = async () => {
   logger.log('info', `Listening on port ${SERVER_PORT}`);
 
-  forEach(init)(controllers);
+  try {
+    actions.emitSocketInit();
+  } catch (e) {
+    logger.warn(e);
+  }
 
   await server.listen(SERVER_PORT);
 };

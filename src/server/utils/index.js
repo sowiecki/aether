@@ -1,5 +1,1 @@
-export const logger = {
-  log(...args) {
-    console.log(args);
-  }
-};
+export * from 'universal/utils';

@@ -11,12 +11,15 @@ const defaultState = {
 
 const EMIT_LIGHT_STRIP_UPDATE = 'EMIT_LIGHT_STRIP_UPDATE';
 
-export const emitLightStripUpdate = createAction(EMIT_LIGHT_STRIP_UPDATE, {
-  red,
-  green,
-  blue,
-  white
-});
+export const emitLightStripUpdate = createAction(
+  EMIT_LIGHT_STRIP_UPDATE,
+  (red, green, blue, white) => ({
+    red,
+    green,
+    blue,
+    white
+  })
+);
 
 const neoPixelReducer = handleActions(
   {
