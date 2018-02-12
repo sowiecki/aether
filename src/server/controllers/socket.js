@@ -3,7 +3,7 @@ import WebSocket from 'ws';
 
 import { WEB_SOCKET_PORT } from 'config';
 import { HANDSHAKE, MESSAGE } from 'constants';
-import { EMIT_SOCKET_HANDSHAKE, EMIT_SOCKET_ERROR } from 'ducks/socket/types';
+import { EMIT_SOCKET_CONNECTION_UPDATE, EMIT_SOCKET_ERROR } from 'ducks/socket/types';
 import { logger } from 'utils';
 
 const wss = new WebSocket.Server({ port: WEB_SOCKET_PORT });
@@ -23,12 +23,12 @@ const socketController = {
    */
   open(dispatch, payload) {
     wss.on('connection', (client) => {
-      socketController.send(HANDSHAKE, payload, client); // Initialize with config
+      socketController.send(client, HANDSHAKE, payload); // Initialize with config
 
       client.on('message', (data) => {
         const message = JSON.parse(data);
 
-        socketController.handle(message.event, message.payload, client);
+        socketController.handle(client, dispatch, message);
       });
 
       client.on('close', () => {
@@ -45,16 +45,10 @@ const socketController = {
    * @param {ws | undefined} client WebSocket object associated with specific targetted client.
    * @returns {undefined}
    */
-  handle(dispatch, event, payload) {
+  handle(client, dispatch, { event }) {
     const handlers = {
       [HANDSHAKE]() {
-        dispatch({ type: EMIT_SOCKET_HANDSHAKE });
-      },
-
-      [MESSAGE]() {
-        const client = socketController.getClient();
-
-        socketController.send(event, payload, client);
+        dispatch({ type: EMIT_SOCKET_CONNECTION_UPDATE, payload: true });
       }
     };
 
@@ -65,7 +59,7 @@ const socketController = {
     socketController.errorNoHandler(event);
   },
 
-  send(event, payload = {}, client) {
+  send(client, event, payload = {}) {
     if (client.readyState === 1) {
       client.send(JSON.stringify({ event, payload }));
     } else {

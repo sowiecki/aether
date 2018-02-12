@@ -1,17 +1,20 @@
+import store from '../config/store';
+import { emitSocketConnectionUpdate } from '../ducks/socket';
 import { HANDSHAKE, MESSAGE, RECONNECTED, TEMPERATURE_UPDATE } from '../constants';
-import { logger } from '../utils'
+import { logger } from '../utils';
 
 const eventHandlers = {
   [HANDSHAKE](x) {
-    console.log(HANDSHAKE, x);
+    logger.log(HANDSHAKE, x);
+    store.dispatch(emitSocketConnectionUpdate());
   },
 
   [MESSAGE](x) {
-    console.log(MESSAGE, x);
+    logger.log(MESSAGE, x);
   },
 
   [RECONNECTED](x) {
-    console.log(RECONNECTED, x);
+    logger.log(RECONNECTED, x);
   }
 };
 

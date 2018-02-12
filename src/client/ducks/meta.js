@@ -1,22 +1,16 @@
 import { handleActions } from 'redux-actions';
 
-import socketInitialize from '../api/socket';
-import { EMIT_SOCKET_INIT, EMIT_SOCKET_HANDSHAKE } from './socket/types';
-
-export const emitSocketInit = () => (dispatch) => socketInitialize(dispatch, EMIT_SOCKET_INIT);
+import socket from './socket';
 
 const initialState = {
-  connected: false,
-  temperature: 60
+  ...socket.initialState,
+  temperature: 0 // TODO move to stats ducks
 };
 
 // TODO make meta
 const reducer = handleActions(
   {
-    [EMIT_SOCKET_HANDSHAKE]: (state) => ({
-      ...state,
-      connected: true
-    })
+    ...socket.handlers
   },
   initialState
 );

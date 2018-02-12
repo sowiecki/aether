@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as MetaActions from '../../ducks/meta';
+import * as actions from '../../ducks';
 
 import StatsController from './controller';
 
@@ -11,7 +11,7 @@ const mapStateToProps = ({ metaReducer }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(MetaActions, dispatch)
+  actions: bindActionCreators(actions, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StatsController);
