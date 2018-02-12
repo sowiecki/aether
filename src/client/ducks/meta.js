@@ -2,7 +2,9 @@ import { handleActions } from 'redux-actions';
 
 import { EMIT_SOCKET_HANDSHAKE } from '../constants';
 
-const defaultState = {};
+const initialState = {
+  temperature: 60
+};
 
 // TODO make meta
 const reducer = handleActions(
@@ -11,7 +13,7 @@ const reducer = handleActions(
       state
     })
   },
-  defaultState
+  initialState
 );
 
 export default reducer;

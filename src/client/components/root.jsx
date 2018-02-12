@@ -3,12 +3,13 @@ import React, { PureComponent } from 'react';
 import { Provider } from 'react-redux';
 
 import store from '../config/store';
+import StatsContainer from './stats/container';
 
 class Root extends PureComponent {
   render() {
     return (
       <Provider store={store}>
-        <div>Hello, world!</div>
+        <StatsContainer />
       </Provider>
     );
   }

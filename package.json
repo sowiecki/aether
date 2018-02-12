@@ -4,6 +4,13 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
+  "scripts": {
+    "start": "sudo node ./src/index.js",
+    "dev": "concurrently -r \"npm run client-dev\" \"npm run server-dev\"",
+    "client-dev": "webpack-dev-server --config webpack/webpack.config.dev.js --color --inline",
+    "server-dev": "NODE_ENV=development nodemon --config .nodemonrc ./src/index.js",
+    "lint": "eslint *.js src"
+  },
   "dependencies": {
     "@koa/cors": "^2.2.1",
     "adafruit-i2c-lcd": "^1.0.2",
@@ -49,13 +56,6 @@
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1",
     "webpack-hot-middleware": "^2.21.0"
-  },
-  "scripts": {
-    "start": "sudo node ./src/index.js",
-    "dev": "concurrently -r \"npm run client-dev\" \"npm run server-dev\"",
-    "client-dev": "webpack-dev-server --config webpack/webpack.config.dev.js --color --inline",
-    "server-dev": "NODE_ENV=development nodemon --config .nodemonrc ./src/index.js",
-    "lint": "eslint *.js src"
   },
   "repository": {
     "type": "git",
