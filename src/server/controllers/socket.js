@@ -1,9 +1,8 @@
-import opn from 'opn';
 import WebSocket from 'ws';
 
 import { WEB_SOCKET_PORT } from 'config';
-import { HANDSHAKE, MESSAGE } from 'constants';
-import { EMIT_SOCKET_CONNECTION_UPDATE, EMIT_SOCKET_ERROR } from 'ducks/socket/types';
+import { HANDSHAKE, RECONNECTED } from 'constants';
+import { EMIT_SOCKET_CONNECTION_UPDATE } from 'ducks/socket/types';
 import { logger } from 'utils';
 
 const wss = new WebSocket.Server({ port: WEB_SOCKET_PORT });
@@ -12,8 +11,8 @@ const wss = new WebSocket.Server({ port: WEB_SOCKET_PORT });
  * Host setup for web application WebSocket server.
  */
 const socketController = {
-  init: () => {
-    opn('localhost:3000');
+  forward(store) {
+    logger.log(store.getState()); // TODO forward whole state?
   },
 
   /**
@@ -21,9 +20,11 @@ const socketController = {
    * @params{string} event Event constant for initial communication with client.
    * @returns {undefined}
    */
-  open(dispatch, payload) {
+  open(store, dispatch) {
+    socketController.unsubscribe = store.subscribe(() => socketController.forward(store));
+
     wss.on('connection', (client) => {
-      socketController.send(client, HANDSHAKE, payload); // Initialize with config
+      socketController.send(client, HANDSHAKE);
 
       client.on('message', (data) => {
         const message = JSON.parse(data);
@@ -32,7 +33,12 @@ const socketController = {
       });
 
       client.on('close', () => {
-        dispatch({ type: EMIT_SOCKET_ERROR });
+        dispatch({
+          type: EMIT_SOCKET_CONNECTION_UPDATE,
+          payload: { client: null, connected: false }
+        });
+
+        socketController.unsubscribe();
       });
     });
   },
@@ -48,7 +54,11 @@ const socketController = {
   handle(client, dispatch, { event }) {
     const handlers = {
       [HANDSHAKE]() {
-        dispatch({ type: EMIT_SOCKET_CONNECTION_UPDATE, payload: true });
+        dispatch({ type: EMIT_SOCKET_CONNECTION_UPDATE, payload: { client, connected: true } });
+      },
+
+      [RECONNECTED]() {
+        dispatch({ type: EMIT_SOCKET_CONNECTION_UPDATE, payload: { client, connected: true } });
       }
     };
 

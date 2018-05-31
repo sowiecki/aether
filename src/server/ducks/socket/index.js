@@ -1,35 +1,31 @@
 import { handleActions, createAction } from 'redux-actions';
 
 import socketController from 'controllers/socket';
+import { EMIT_SOCKET_CONNECTION_UPDATE } from './types';
 
-const defaultState = {
+const initialState = {
   client: null
 };
 
-const EMIT_CLIENT_CONNECTION = 'EMIT_CLIENT_CONNECTION';
-const EMIT_CLIENT_DISCONNECTION = 'EMIT_CLIENT_DISCONNECTION';
+export const emitSocketInit = (store) => (dispatch) => socketController.open(store, dispatch);
 
-export const emitSocketInit = () => (dispatch) => socketController.open(dispatch);
-
-export const emitClientConnection = createAction(EMIT_CLIENT_CONNECTION, (client) => ({
-  client
-}));
-
-export const emitClientDisconnection = createAction(EMIT_CLIENT_DISCONNECTION);
+export const emitClientConnectionUpdate = createAction(
+  EMIT_SOCKET_CONNECTION_UPDATE,
+  (client, connected) => ({
+    client,
+    connected
+  })
+);
 
 const socketReducer = handleActions(
   {
-    [EMIT_CLIENT_CONNECTION]: (state, client) => ({
+    [EMIT_SOCKET_CONNECTION_UPDATE]: (state, { payload }) => ({
       ...state,
-      client
-    }),
-
-    [EMIT_CLIENT_DISCONNECTION]: (state) => ({
-      ...state,
-      client: defaultState.client
+      client: payload.client,
+      connected: payload.connected
     })
   },
-  defaultState
+  initialState
 );
 
 export default socketReducer;

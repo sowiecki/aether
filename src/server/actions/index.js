@@ -1,11 +1,13 @@
 import { bindActionCreators } from 'redux';
 
+import store from 'config/store';
 import * as SocketActions from 'ducks/socket';
-import store from '../store';
+import * as TemperatureActions from 'ducks/temperature';
 
 export default bindActionCreators(
   {
-    ...SocketActions
+    ...SocketActions,
+    ...TemperatureActions
   },
   store.dispatch
 );
