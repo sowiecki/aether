@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 
 import store from '../config/store';
 import StatsContainer from './stats/container';
+import './common/styles.js';
 
 class Root extends PureComponent {
   render() {
