@@ -11,6 +11,10 @@
     "server-dev": "NODE_ENV=development nodemon --config .nodemonrc ./src/index.js",
     "lint": "eslint *.js src"
   },
+  "engines": {
+    "node": "11.15.0",
+    "npm": "6.7.0"
+  },
   "dependencies": {
     "@koa/cors": "^2.2.1",
     "adafruit-i2c-lcd": "^1.0.2",
@@ -63,10 +67,6 @@
   },
   "author": "Sean Owiecki",
   "license": "MIT",
-  "engines": {
-    "node": "13.1.0",
-    "npm": "6.12.1"
-  },
   "bugs": {
     "url": "https://github.com/Nase00/aether/issues"
   },
